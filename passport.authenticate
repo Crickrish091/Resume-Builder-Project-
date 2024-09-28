@@ -1,0 +1,8 @@
+// Protecting the saveResume route
+app.post('/saveResume', passport.authenticate('jwt', { session: false }), (req, res) =>
+{
+  const resumeData = new Resume(req.body);
+  resumeData.save()
+    .then(() => res.send('Resume saved successfully'))
+    .catch(err => res.status(400).send('Error saving resume'));
+});

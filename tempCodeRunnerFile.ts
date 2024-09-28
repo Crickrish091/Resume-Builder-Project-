@@ -1,0 +1,57 @@
+function addWorkExperience() {
+  const workExperienceSection = document.getElementById("work-experience");
+  const newExperience = `
+    <div class="mb-3">
+      <label for="jobTitle" class="form-label">Job Title</label>
+      <input type="text" class="form-control" name="jobTitle" placeholder="Enter your job title">
+    </div>
+    <div class="mb-3">
+      <label for="jobDescription" class="form-label">Job Description</label>
+      <textarea class="form-control" name="jobDescription" placeholder="Describe your responsibilities"></textarea>
+    </div>`;
+  workExperienceSection.insertAdjacentHTML("beforeend", newExperience);
+}
+
+// Generate the live preview of the resume
+function generatePreview() {
+  const name = document.getElementById("name").value.trim();
+  const contact = document.getElementById("contact").value.trim();
+  const skills = document.getElementById("skills").value.trim();
+  const education = document.getElementById("education").value.trim();
+  
+  // Check if mandatory fields are filled
+  if (!name || !contact || !skills || !education) {
+    alert("Please fill out all the mandatory fields: Name, Contact, Skills, and Education.");
+    return;
+  }
+  
+  // Work Experience: Collect job titles and descriptions
+  const workExperienceInputs = document.querySelectorAll("#work-experience input, #work-experience textarea");
+  let workExperienceHTML = "";
+  
+  for (let i = 0; i < workExperienceInputs.length; i += 2) {
+    const jobTitle = workExperienceInputs[i].value.trim();
+    const jobDescription = workExperienceInputs[i + 1].value.trim();
+    
+    // Add work experience only if both job title and description are provided
+    if (jobTitle && jobDescription) {
+      workExperienceHTML += `
+        <h4>${jobTitle}</h4>
+        <p>${jobDescription}</p>`;
+    }
+  }
+
+  // Generate preview content
+  const previewContent = `
+    <h3>${name}</h3>
+    <p>${contact}</p>
+    <h4>Skills</h4>
+    <p>${skills}</p>
+    <h4>Education</h4>
+    <p>${education}</p>
+    <h4>Work Experience</h4>
+    ${workExperienceHTML || '<p>No work experience added.</p>'}`;
+
+  // Update the preview section
+  document.getElementById("previewContent").innerHTML = previewContent;
+}

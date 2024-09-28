@@ -1,0 +1,12 @@
+{
+  "name": "John Doe",
+  "contact": "johndoe@example.com",
+  "skills": "JavaScript, Node.js, HTML, CSS",
+  "education": "B.Sc. in Computer Science",
+  "workExperience": [
+    {
+      "jobTitle": "Frontend Developer",
+      "jobDescription": "Developed user interfaces using React."
+    }
+  ]
+}

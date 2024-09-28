@@ -1,0 +1,29 @@
+function saveResume() {
+  const resumeData = {
+    name: document.getElementById("name").value,
+    contact: document.getElementById("contact").value,
+    skills: document.getElementById("skills").value,
+    education: document.getElementById("education").value,
+    workExperience: []
+  };
+
+  // Gather work experience data
+  const jobTitles = document.querySelectorAll("input[name='jobTitle']");
+  const jobDescriptions = document.querySelectorAll("textarea[name='jobDescription']");
+  for (let i = 0; i < jobTitles.length; i++) {
+    resumeData.workExperience.push({
+      jobTitle: jobTitles[i].value,
+      jobDescription: jobDescriptions[i].value
+    });
+  }
+
+  // Save the resume via API
+  fetch('/saveResume', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(resumeData)
+  }).then(response => response.text())
+    .then(data => alert(data));
+}
